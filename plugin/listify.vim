@@ -2,11 +2,11 @@
 :nnoremap <leader>lt :w<cr>:so %<cr>:call <SID>TestAll()<cr>
 
 function! s:AssertThat( fn, arg, expectation )
+    let g:ListifyTestsRun += 1
     let result = call(function("<SID>".a:fn),a:arg)
     if result != a:expectation
+        let g:ListifyTestsFailed += 1
         echom "Test Failed: " . a:fn . "(" . string(a:arg)[1:-2] . ") returned ". string(result) . ", expected " string(a:expectation)
-    else
-        echom "Test Passed!"
     endif
 endfunction
 
@@ -27,8 +27,13 @@ function! s:TestSplitify()
 endfunction
 
 function! s:TestAll()
+    let g:ListifyTestsRun = 0
+    let g:ListifyTestsFailed = 0
     call <SID>TestSplitify()
     call <SID>TestFindLastQuote()
+    if g:ListifyTestsFailed == 0
+        echom "Testing completed: " . g:ListifyTestsRun . " tests run, all passed."
+    endif
 endfunction
 
 function! s:FindLastQuote( string, start )
