@@ -17,7 +17,7 @@ function! s:TestFindLastQuote()
     call <SID>AssertThat( "FindLastQuote", ['   "\"', 5], 3 )
 endfunction
 
-function! s:TestListify()
+function! s:TestSplitify()
     call <SID>AssertThat( "Splitify", ["1 2 3"], ["1", "2", "3"] )
     call <SID>AssertThat( "Splitify", ['1 "2 4" 3'], ["1", '"2 4"', "3"] )
     call <SID>AssertThat( "Splitify", ['1 "ab c""2 4" 3'], ["1", '"ab c""2 4"', "3"] )
@@ -27,7 +27,7 @@ function! s:TestListify()
 endfunction
 
 function! s:TestAll()
-    call <SID>TestListify()
+    call <SID>TestSplitify()
     call <SID>TestFindLastQuote()
 endfunction
 
