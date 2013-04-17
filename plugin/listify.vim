@@ -1,5 +1,5 @@
-:inoremap <C-L> <C-G>u<esc>:call <SID>Listify()<cr>gi
-:nnoremap <leader>lt :w<cr>:so %<cr>:call <SID>TestAll()<cr>
+inoremap <C-L> <C-G>u<esc>:call <SID>Listify()<cr>gi
+nnoremap <leader>lt :w<cr>:so %<cr>:call <SID>TestAll()<cr>
 
 function! s:AssertThat( fn, arg, expectation )
     let g:ListifyTestsRun += 1
